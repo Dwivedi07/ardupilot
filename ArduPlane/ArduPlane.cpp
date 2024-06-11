@@ -21,7 +21,7 @@
  */
 
 #include "Plane.h"
-
+#include <iostream>
 #define SCHED_TASK(func, rate_hz, max_time_micros, priority) SCHED_TASK_CLASS(Plane, &plane, func, rate_hz, max_time_micros, priority)
 #define FAST_TASK(func) FAST_TASK_CLASS(Plane, &plane, func)
 
@@ -488,6 +488,22 @@ void Plane::update_control_mode(void)
     update_fly_forward();
 
     control_mode->update();
+
+    // Get the singleton instance of AP_LandingGear
+    AP_LandingGear *landingGear = AP_LandingGear::get_singleton();
+    // This is working fine
+
+    if (landingGear != nullptr) {
+        if (control_mode == &mode_qloiter ) {
+            
+            landingGear->new_retract_landing_gear();
+        } else {
+           
+            landingGear->new_deploy_landing_gear();   
+        }
+    } else {
+        std::cerr << "Failed to get AP_LandingGear singleton instance" << std::endl;
+    }
 }
 
 

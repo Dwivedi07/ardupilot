@@ -85,6 +85,12 @@ public:
     void retract_after_takeoff();
     void deploy_for_landing();
 
+    // Using Public Wrapper
+    /* */
+    void new_deploy_landing_gear();
+    void new_retract_landing_gear();
+    // */
+
 private:
     // Parameters
     AP_Int8     _enable;
