@@ -304,19 +304,19 @@ void AP_LandingGear::update(float height_above_ground_m)
 
     _last_height_above_ground = alt_m;
 
-    /* */ 
+    
        
     // Add pitch angle based logic
-    float pitch_angle = AP::ahrs().get_pitch();  // Get the pitch angle
-    if (fabs(pitch_angle) < 0.8) {  // Check if the absolute pitch angle is above 70 degrees
-        if (!_deployed) {
-            deploy();
-        }
-    } else {
-        if (_deployed) {
-            retract();
-        }
-    }
+    // float pitch_angle = AP::ahrs().get_pitch();  // Get the pitch angle
+    // if (fabs(pitch_angle) < 0.8) {  // Check if the absolute pitch angle is above 70 degrees
+    //     if (!_deployed) {
+    //         deploy();
+    //     }
+    // } else {
+    //     if (_deployed) {
+    //         retract();
+    //     }
+    // }
     
     /* */
 }
