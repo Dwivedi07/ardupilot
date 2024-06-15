@@ -498,9 +498,11 @@ void Plane::update_control_mode(void)
 
     if (landingGear != nullptr) {
         if (control_mode == &mode_qloiter ) {
-            // before retraction ensure that we are in VTOL mode
-            if (quadplane.tailsitter.transition_vtol_complete()){
-            landingGear->new_retract_landing_gear();}
+            #if HAL_QUADPLANE_ENABLED
+                // before retraction ensure that we are in VTOL mode
+                if (quadplane.tailsitter.transition_vtol_complete()){
+                landingGear->new_retract_landing_gear();}
+            #endif
         } else {
             // Deploy and then transition to FW mode
             landingGear->new_deploy_landing_gear();   
