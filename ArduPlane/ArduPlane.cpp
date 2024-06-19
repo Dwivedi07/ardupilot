@@ -497,7 +497,11 @@ void Plane::update_control_mode(void)
     // This is working fine
 
     if (landingGear != nullptr) {
-        if (control_mode == &mode_qloiter ) {
+        if (control_mode == &mode_qloiter ||
+         control_mode == &mode_qstabilize  ||
+         control_mode == &mode_qhover ||
+         control_mode == &mode_qland ||
+         control_mode == &mode_qrtl) {
             #if HAL_QUADPLANE_ENABLED
                 // before retraction ensure that we are in VTOL mode
                 if (quadplane.in_vtol_mode()){
