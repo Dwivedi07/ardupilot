@@ -500,7 +500,7 @@ void Plane::update_control_mode(void)
         if (control_mode == &mode_qloiter ) {
             #if HAL_QUADPLANE_ENABLED
                 // before retraction ensure that we are in VTOL mode
-                if (quadplane.tailsitter.transition_vtol_complete()){
+                if (quadplane.in_vtol_mode()){
                 landingGear->new_retract_landing_gear();}
             #endif
         } else {
