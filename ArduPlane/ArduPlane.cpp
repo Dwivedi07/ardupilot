@@ -501,10 +501,11 @@ void Plane::update_control_mode(void)
          control_mode == &mode_qstabilize  ||
          control_mode == &mode_qhover ||
          control_mode == &mode_qland ||
+         control_mode == &mode_takeoff ||
          control_mode == &mode_qrtl) {
             #if HAL_QUADPLANE_ENABLED
                 // before retraction ensure that we are in VTOL mode
-                if (quadplane.in_vtol_mode()){
+                if (quadplane.is_flying_vtol()){
                 landingGear->new_retract_landing_gear();}
             #endif
         } else {
