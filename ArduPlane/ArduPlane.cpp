@@ -505,8 +505,11 @@ void Plane::update_control_mode(void)
          control_mode == &mode_qrtl) {
             #if HAL_QUADPLANE_ENABLED
                 // before retraction ensure that we are in VTOL mode
+                
                 if (quadplane.is_flying_vtol()){
+                gcs().send_text(MAV_SEVERITY_INFO, "Yes VTOL flying");
                 landingGear->new_retract_landing_gear();}
+                else {gcs().send_text(MAV_SEVERITY_INFO, "Not in VTOL");}
             #endif
         } else {
             // Deploy and then transition to FW mode
