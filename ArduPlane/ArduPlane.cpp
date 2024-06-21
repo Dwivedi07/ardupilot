@@ -495,7 +495,6 @@ void Plane::update_control_mode(void)
     // Get the singleton instance of AP_LandingGear
     AP_LandingGear *landingGear = AP_LandingGear::get_singleton();
     // This is working fine
-    gcs().send_text(MAV_SEVERITY_INFO, "Landing gear enabled check");
     if (landingGear != nullptr) {
         if (control_mode == &mode_qloiter ||
          control_mode == &mode_qstabilize  ||
@@ -503,14 +502,13 @@ void Plane::update_control_mode(void)
          control_mode == &mode_qland ||
          control_mode == &mode_takeoff ||
          control_mode == &mode_qrtl) {
-            #if HAL_QUADPLANE_ENABLED
+            
                 // before retraction ensure that we are in VTOL mode
-                gcs().send_text(MAV_SEVERITY_INFO, "QUADPLANE enabled");
                 if (quadplane.is_flying_vtol()){
                 gcs().send_text(MAV_SEVERITY_INFO, "Yes VTOL flying");
                 landingGear->new_retract_landing_gear();}
                 else {gcs().send_text(MAV_SEVERITY_INFO, "Not in VTOL");}
-            #endif
+            
         } else {
             // Deploy and then transition to FW mode
             landingGear->new_deploy_landing_gear();   
