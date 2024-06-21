@@ -504,7 +504,7 @@ void Plane::update_control_mode(void)
          control_mode == &mode_qrtl) {
             
             // before retraction ensure that we are in VTOL mode
-            a = quadplane.in_vtol_mode();
+            
             if (quadplane.in_vtol_mode()){
             gcs().send_text(MAV_SEVERITY_WARNING, "IN VTOL MODE");
             landingGear->new_retract_landing_gear();}
