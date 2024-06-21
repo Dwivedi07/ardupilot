@@ -503,11 +503,14 @@ void Plane::update_control_mode(void)
          control_mode == &mode_takeoff ||
          control_mode == &mode_qrtl) {
             
-                // before retraction ensure that we are in VTOL mode
-                if (quadplane.is_flying_vtol()){
-                gcs().send_text(MAV_SEVERITY_INFO, "Yes VTOL flying");
-                landingGear->new_retract_landing_gear();}
-                else {gcs().send_text(MAV_SEVERITY_INFO, "Not in VTOL");}
+            // before retraction ensure that we are in VTOL mode
+            a = quadplane.in_vtol_mode();
+            if (a==1){
+            gcs().send_text(MAV_SEVERITY_WARNING, "IN VTOL MODE");
+            landingGear->new_retract_landing_gear();}
+            else {gcs().send_text(MAV_SEVERITY_WARNING, "NOT IN VTOL MODE");}
+            
+                
             
         } else {
             // Deploy and then transition to FW mode
