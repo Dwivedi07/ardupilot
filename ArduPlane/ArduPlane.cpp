@@ -497,7 +497,7 @@ void Plane::update_control_mode(void)
     // This is working fine
     if (landingGear != nullptr) {
 
-        gcs().send_text(MAV_SEVERITY_INFO, "Control mode: %d", control_mode->mode_number());
+        // gcs().send_text(MAV_SEVERITY_INFO, "Control mode: %d", control_mode->mode_number());
         if (control_mode == &mode_qloiter ||
          control_mode == &mode_qstabilize  ||
          control_mode == &mode_qhover ||
