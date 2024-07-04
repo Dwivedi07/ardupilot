@@ -505,8 +505,8 @@ void Plane::update_control_mode(void)
             // before retraction ensure that we are in VTOL mode
             
             // if (quadplane.in_vtol_mode())
-            const float trans_angle = quadplane.tailsitter.get_transition_angle_vtol();
-            if (labs(plane.ahrs.pitch_sensor) > trans_angle*100) {
+            // const float trans_angle = quadplane.tailsitter.get_transition_angle_vtol();
+            if (quadplane.tailsitter.transition_vtol_complete()) {
             landingGear->new_retract_landing_gear();}
             
             
