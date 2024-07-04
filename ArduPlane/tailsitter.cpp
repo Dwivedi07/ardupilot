@@ -277,6 +277,7 @@ bool Tailsitter::active(void)
     return false;
 }
 
+
 /*
   run output for tailsitters
  */
@@ -540,6 +541,7 @@ bool Tailsitter::transition_vtol_complete(void) const
 {
     if (!plane.arming.is_armed_and_safety_off()) {
         // instant transition when disarmed, no message
+        quadplane.tailsitter.setTailsitterVTOLComp(true);
         return true;
     }
     // for vectored tailsitters at zero pilot throttle
@@ -548,12 +550,14 @@ bool Tailsitter::transition_vtol_complete(void) const
         // transition immediately to tilt motors up and prevent prop strikes
         if (quadplane.ahrs.groundspeed() < 1.0f) {
             gcs().send_text(MAV_SEVERITY_INFO, "Transition VTOL done, zero throttle");
+            quadplane.tailsitter.setTailsitterVTOLComp(true);
             return true;
         }
     }
     const float trans_angle = get_transition_angle_vtol();
     if (labs(plane.ahrs.pitch_sensor) > trans_angle*100) {
         gcs().send_text(MAV_SEVERITY_INFO, "Transition VTOL done");
+        quadplane.tailsitter.setTailsitterVTOLComp(true);
         return true;
     }
     int32_t roll_cd = labs(plane.ahrs.roll_sensor);
@@ -562,14 +566,21 @@ bool Tailsitter::transition_vtol_complete(void) const
     }
     if (roll_cd > MAX(4500, plane.roll_limit_cd + 500)) {
         gcs().send_text(MAV_SEVERITY_WARNING, "Transition VTOL done, roll error");
+        quadplane.tailsitter.setTailsitterVTOLComp(true);
         return true;
     }
     if (AP_HAL::millis() - transition->vtol_transition_start_ms >  ((trans_angle-(transition->vtol_transition_initial_pitch*0.01f))/transition_rate_vtol)*1500) {
         gcs().send_text(MAV_SEVERITY_WARNING, "Transition VTOL done, timeout");
+        quadplane.tailsitter.setTailsitterVTOLComp(true);
         return true;
     }
+    quadplane.tailsitter.setTailsitterVTOLComp(false);
     return false;
 }
+
+void Tailsitter::setTailsitterVTOLComp(bool value) {
+        transitionvtol_comp = value;
+    }
 
 // handle different tailsitter input types
 void Tailsitter::check_input(void)

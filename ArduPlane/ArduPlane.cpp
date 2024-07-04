@@ -500,18 +500,23 @@ void Plane::update_control_mode(void)
         // gcs().send_text(MAV_SEVERITY_INFO, "Control mode: %d", control_mode->mode_number());
         if (control_mode == &mode_qloiter ||
             control_mode == &mode_qstabilize  ||
-            control_mode == &mode_qhover ||
-            control_mode == &mode_qland ||
+            control_mode == &mode_qhover) {
+            
+            
+            landingGear->new_retract_landing_gear();
+            
+        } 
+        if (control_mode == &mode_qland ||
             control_mode == &mode_takeoff ||
             control_mode == &mode_qrtl) {
             
             // before retraction ensure that we are in VTOL mode
             
-            if (quadplane.in_vtol_mode()) 
+            //if (quadplane.in_vtol_mode()) 
 
             // const float trans_angle = quadplane.tailsitter.get_transition_angle_vtol();
             
-            // if (quadplane.tailsitter.transition_vtol_complete()) 
+            if (quadplane.tailsitter.transitionvtol_comp) 
 
             {
             landingGear->new_retract_landing_gear();}

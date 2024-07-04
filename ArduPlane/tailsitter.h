@@ -55,6 +55,8 @@ public:
     // check if we have completed transition to vtol
     bool transition_vtol_complete(void) const;
 
+    void setTailsitterVTOLComp(bool value);
+    
     // return true if transition to VTOL flight
     bool in_vtol_transition(uint32_t now = 0) const;
 
@@ -136,6 +138,9 @@ private:
 
     // true when flying a tilt-vectored tailsitter
     bool _is_vectored;
+
+    // flag without print messages
+    bool transitionvtol_comp;
 
     // true is outputs are configured
     bool _have_elevator;
