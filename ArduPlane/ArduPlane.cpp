@@ -519,14 +519,14 @@ void Plane::update_control_mode(void)
             
             if (quadplane.tailsitter.transitionvtol_comp) {
 
-            // {gcs().send_text(MAV_SEVERITY_INFO, "R2");
+            {gcs().send_text(MAV_SEVERITY_INFO, "R2");
             landingGear->new_retract_landing_gear();}
             
         } else {
             // Deploy and then transition to FW mode
             // gcs().send_text(MAV_SEVERITY_INFO, "D1");
-            if (quadplane.in_vtol_mode()){gcs().send_text(MAV_SEVERITY_INFO, "VTOL D1");}
-            landingGear->new_deploy_landing_gear();   
+            if (!quadplane.in_vtol_mode()){
+            landingGear->new_deploy_landing_gear();   }
         }
     }
     
