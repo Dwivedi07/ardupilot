@@ -508,7 +508,8 @@ void Plane::update_control_mode(void)
             landingGear->new_retract_landing_gear();
             
         } 
-        else if (control_mode == &mode_qland) {
+        else if (control_mode == &mode_qland ||
+        control_mode == &mode_qrtl) {
             
             // before retraction ensure that we are in VTOL mode
             
@@ -524,6 +525,7 @@ void Plane::update_control_mode(void)
         } else {
             // Deploy and then transition to FW mode
             // gcs().send_text(MAV_SEVERITY_INFO, "D1");
+            if (quadplane.in_vtol_mode()){gcs().send_text(MAV_SEVERITY_INFO, "VTOL D1");}
             landingGear->new_deploy_landing_gear();   
         }
     }
