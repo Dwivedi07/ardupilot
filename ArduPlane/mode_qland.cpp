@@ -15,6 +15,7 @@ bool ModeQLand::_enter()
     quadplane.landing_detect.land_start_ms = 0;
 #if AP_LANDINGGEAR_ENABLED
     plane.g2.landing_gear.new_retract_landing_gear();
+    gcs().send_text(MAV_SEVERITY_INFO, "Landing R");
 #endif
 #if AP_FENCE_ENABLED
     plane.fence.auto_disable_fence_for_landing();
