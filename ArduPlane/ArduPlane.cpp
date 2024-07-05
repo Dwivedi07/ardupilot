@@ -519,7 +519,7 @@ void Plane::update_control_mode(void)
             
             if (quadplane.tailsitter.transitionvtol_comp) {
 
-            {gcs().send_text(MAV_SEVERITY_INFO, "R2");
+            gcs().send_text(MAV_SEVERITY_INFO, "R2");
             landingGear->new_retract_landing_gear();}
             
         } else {
