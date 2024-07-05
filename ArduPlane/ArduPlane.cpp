@@ -502,10 +502,11 @@ void Plane::update_control_mode(void)
             control_mode == &mode_qstabilize  ||
             control_mode == &mode_qhover||
             control_mode == &mode_qautotune||
-            control_mode == &mode_qacro && quadplane.in_vtol_mode()) {
+            control_mode == &mode_qacro) {
             
             // gcs().send_text(MAV_SEVERITY_INFO, "R1");
-            landingGear->new_retract_landing_gear();
+            if (quadplane.in_vtol_mode()) {
+            landingGear->new_retract_landing_gear();}
             
         } 
         else if (control_mode == &mode_qland ||
