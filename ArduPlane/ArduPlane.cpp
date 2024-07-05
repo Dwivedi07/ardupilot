@@ -526,7 +526,7 @@ void Plane::update_control_mode(void)
             // Deploy and then transition to FW mode
             // gcs().send_text(MAV_SEVERITY_INFO, "D1");
             if (!quadplane.in_vtol_mode()){
-            gcs().send_text(MAV_SEVERITY_INFO, "D1");
+            //gcs().send_text(MAV_SEVERITY_INFO, "D1");
             landingGear->new_deploy_landing_gear();   }
         }
     }
