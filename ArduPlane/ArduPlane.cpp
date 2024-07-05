@@ -500,15 +500,15 @@ void Plane::update_control_mode(void)
         // gcs().send_text(MAV_SEVERITY_INFO, "Control mode: %d", control_mode->mode_number());
         if (control_mode == &mode_qloiter ||
             control_mode == &mode_qstabilize  ||
-            control_mode == &mode_qhover) {
+            control_mode == &mode_qhover||
+            control_mode == &mode_qautotune||
+            control_mode == &mode_qacro) {
             
-            gcs().send_text(MAV_SEVERITY_INFO, "R1");
+            // gcs().send_text(MAV_SEVERITY_INFO, "R1");
             landingGear->new_retract_landing_gear();
             
         } 
-        if (control_mode == &mode_qland ||
-            control_mode == &mode_takeoff ||
-            control_mode == &mode_qrtl) {
+        else if (control_mode == &mode_qland) {
             
             // before retraction ensure that we are in VTOL mode
             
@@ -516,22 +516,22 @@ void Plane::update_control_mode(void)
 
             // const float trans_angle = quadplane.tailsitter.get_transition_angle_vtol();
             
-            if (quadplane.tailsitter.transitionvtol_comp) 
+            if (quadplane.tailsitter.transitionvtol_comp) {
 
-            {gcs().send_text(MAV_SEVERITY_INFO, "R2");
+            // {gcs().send_text(MAV_SEVERITY_INFO, "R2");
             landingGear->new_retract_landing_gear();}
             
         } else {
             // Deploy and then transition to FW mode
-            gcs().send_text(MAV_SEVERITY_INFO, "D1");
+            // gcs().send_text(MAV_SEVERITY_INFO, "D1");
             landingGear->new_deploy_landing_gear();   
         }
     }
     
 #endif
     
-}
 
+    }
 
 void Plane::update_fly_forward(void)
 {
