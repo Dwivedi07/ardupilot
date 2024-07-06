@@ -505,7 +505,7 @@ void Plane::update_control_mode(void)
             control_mode == &mode_qacro) {
             
             // gcs().send_text(MAV_SEVERITY_INFO, "R1");
-            if (!quadplane.in_vtol_mode()){
+            if (quadplane.in_vtol_mode()){
             //gcs().send_text(MAV_SEVERITY_INFO, "D1");
             landingGear->new_retract_landing_gear();  }
             
