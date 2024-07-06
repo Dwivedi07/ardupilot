@@ -308,14 +308,18 @@ void AP_LandingGear::update(float height_above_ground_m)
             _deploy_alt > 0 &&
             alt_m <= _deploy_alt &&
             _last_height_above_ground > _deploy_alt) {
-            deploy();
+            //deploy();
+            // changing for tailsitter
+            retract();
         }
         if ((_deployed || !_have_changed) &&
             _retract_alt > 0 &&
             _retract_alt >= _deploy_alt &&
             alt_m >= _retract_alt &&
             _last_height_above_ground < _retract_alt) {
-            retract();
+            //retract();
+            // changing for tailsitter
+            deploy();
         }
     }
 
@@ -363,7 +367,9 @@ bool AP_LandingGear::check_before_land(void)
 void AP_LandingGear::retract_after_takeoff()
 {
     if (_options.get() & (uint16_t)Option::RETRACT_AFTER_TAKEOFF) {
-        retract();
+        //retract();
+        // changing for tailsitter
+        deploy();
     }
 }
 
@@ -371,7 +377,9 @@ void AP_LandingGear::retract_after_takeoff()
 void AP_LandingGear::deploy_for_landing()
 {
     if (_options.get() & (uint16_t)Option::DEPLOY_DURING_LANDING) {
-        deploy();
+        //deploy();
+        // changing for tailsitter
+        retract();
     }
 }
 
