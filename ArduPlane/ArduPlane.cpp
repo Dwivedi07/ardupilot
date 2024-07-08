@@ -520,10 +520,10 @@ void Plane::update_control_mode(void)
 
             // const float trans_angle = quadplane.tailsitter.get_transition_angle_vtol();
             
-            if (quadplane.tailsitter.transitionvtol_comp) {
+            if (quadplane.tailsitter.transitionvtol_comp && quadplane.in_vtol_mode()) {
 
             //gcs().send_text(MAV_SEVERITY_INFO, "R2");
-            landingGear->new_retract_landing_gear(" Retraction asTalisitter VTOL Transition Completed");}
+            landingGear->new_retract_landing_gear(" Retraction as Talisitter VTOL Transition Completed");}
             
         } else {
             // Deploy and then transition to FW mode
