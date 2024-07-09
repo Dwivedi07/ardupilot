@@ -3,7 +3,7 @@
 #pragma once
 
 #include "AP_LandingGear_config.h"
-#include <string>
+
 #if AP_LANDINGGEAR_ENABLED
 
 #include <AP_Param/AP_Param.h>
@@ -87,8 +87,8 @@ public:
 
     // Using Public Wrapper
     /* */
-    void new_deploy_landing_gear(const std::string& message);
-    void new_retract_landing_gear(const std::string& message);
+    void new_deploy_landing_gear();
+    void new_retract_landing_gear();
     // */
 
 private:

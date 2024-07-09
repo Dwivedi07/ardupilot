@@ -507,7 +507,7 @@ void Plane::update_control_mode(void)
             // gcs().send_text(MAV_SEVERITY_INFO, "R1");
             if (quadplane.in_vtol_mode()){
             //gcs().send_text(MAV_SEVERITY_INFO, "D1");
-            landingGear->new_retract_landing_gear("Q modes Retraction and VTOL mode on ");  }
+            landingGear->new_retract_landing_gear();  }
             
             
         } 
@@ -523,14 +523,14 @@ void Plane::update_control_mode(void)
             if (quadplane.tailsitter.transitionvtol_comp && quadplane.in_vtol_mode()) {
 
             //gcs().send_text(MAV_SEVERITY_INFO, "R2");
-            landingGear->new_retract_landing_gear(" Retraction as Talisitter VTOL Transition Completed");}
+            landingGear->new_retract_landing_gear();}
             
         } else {
             // Deploy and then transition to FW mode
             // gcs().send_text(MAV_SEVERITY_INFO, "D1");
             if (!quadplane.in_vtol_mode()){
             //gcs().send_text(MAV_SEVERITY_INFO, "D1");
-            landingGear->new_deploy_landing_gear(" Non Qmode Deployment Not in VTOL mode");   }
+            landingGear->new_deploy_landing_gear();   }
         }
     }
     

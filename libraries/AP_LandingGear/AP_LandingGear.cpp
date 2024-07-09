@@ -7,7 +7,7 @@
 #include <AP_HAL/AP_HAL.h>
 #include <AP_Logger/AP_Logger.h>
 #include <GCS_MAVLink/GCS.h>
-#include <string>
+
 #include <AP_AHRS/AP_AHRS.h>
 
 #if CONFIG_HAL_BOARD == HAL_BOARD_SITL
@@ -202,17 +202,17 @@ void AP_LandingGear::retract()
 
 // Using Public Wrapper
 
-void AP_LandingGear::new_retract_landing_gear(const std::string& message) {
+void AP_LandingGear::new_retract_landing_gear() {
     std::string msg = message;
     if (_deployed){retract();
     
-    gcs().send_text(MAV_SEVERITY_INFO," %s", msg.c_str());}
+    }
 }
 
-void AP_LandingGear::new_deploy_landing_gear(const std::string& message) {
+void AP_LandingGear::new_deploy_landing_gear() {
     std::string msg = message;
     if (!_deployed) {deploy();
-    gcs().send_text(MAV_SEVERITY_INFO, " %s", msg.c_str());}
+    }
 }
 
 
