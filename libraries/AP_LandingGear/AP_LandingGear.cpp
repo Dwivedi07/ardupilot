@@ -203,14 +203,14 @@ void AP_LandingGear::retract()
 // Using Public Wrapper
 
 void AP_LandingGear::new_retract_landing_gear() {
-    std::string msg = message;
+    
     if (_deployed){retract();
     
     }
 }
 
 void AP_LandingGear::new_deploy_landing_gear() {
-    std::string msg = message;
+    
     if (!_deployed) {deploy();
     }
 }
