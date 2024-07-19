@@ -394,13 +394,13 @@ bool RC_Channel_Plane::do_aux_function(const AUX_FUNC ch_option, const AuxSwitch
             // Adding the interuupt pitch signal logic
             
             
-            if (plane.channel_pitch != nullptr) {
-                float pitch_command = plane.channel_pitch->get_control_in();
-                if (fabs(pitch_command) > 0.0f) { // Assuming a non-zero pitch command means the pilot is commanding pitch
-                    plane.quadplane.weathervane->allow_weathervaning(false);
-                    gcs().send_text(MAV_SEVERITY_INFO, "Weather Vane Disabled due to Pitch Command");
-                }
-            }
+            // if (plane.channel_pitch != nullptr) {
+            //     float pitch_command = plane.channel_pitch->get_control_in();
+            //     if (fabs(pitch_command) > 0.0f) { // Assuming a non-zero pitch command means the pilot is commanding pitch
+            //         plane.quadplane.weathervane->allow_weathervaning(false);
+            //         gcs().send_text(MAV_SEVERITY_INFO, "Weather Vane Disabled due to Pitch Command");
+            //     }
+            // }
             
         }
         break;

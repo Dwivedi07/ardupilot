@@ -3821,7 +3821,22 @@ float QuadPlane::get_weathervane_yaw_rate_cds(void)
                                      pos_control->get_pitch_cd(),
                                      is_takeoff,
                                      in_vtol_land_sequence())) {
-        return constrain_float(wv_output * (1/45.0), -100.0, 100.0) * command_model_pilot.get_rate() * 0.5;
+                                    
+                                    // Adding the logic to check if manual command coming from pitch channel
+                                    if (plane.channel_pitch != nullptr) {
+                                        float pitch_command = plane.channel_pitch->get_control_in();
+                                        if (fabs(pitch_command) > 0.0f) { // Assuming a non-zero pitch command means the pilot is commanding pitch
+                                            plane.quadplane.weathervane->allow_weathervaning(false);
+                                            gcs().send_text(MAV_SEVERITY_INFO, "Weather Vane Disabled due to Pitch Command");
+                                            return 0.0;
+                                        }
+                                    }
+
+                                    else {
+                                        return constrain_float(wv_output * (1/45.0), -100.0, 100.0) * command_model_pilot.get_rate() * 0.5;
+                                    }
+    // return constrain_float(wv_output * (1/45.0), -100.0, 100.0) * command_model_pilot.get_rate() * 0.5;
+        
     }
 
     return 0.0;
