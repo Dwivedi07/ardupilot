@@ -143,6 +143,9 @@ public:
     // is throttle controlled landing descent active?
     bool thr_ctrl_land;
 
+    // flag to check if any pilot command is coming through RC_Channel
+    bool flag_p_command;
+
     uint16_t get_pilot_velocity_z_max_dn() const;
     
     struct PACKED log_QControl_Tuning {
