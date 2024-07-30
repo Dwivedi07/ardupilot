@@ -221,6 +221,7 @@ private:
     AP_YawController yawController{aparm};
     AP_SteerController steerController{};
 
+
     // Training mode
     bool training_manual_roll;  // user has manual roll control
     bool training_manual_pitch; // user has manual pitch control
@@ -1254,6 +1255,10 @@ public:
     void failsafe_check(void);
     bool is_landing() const override;
     bool is_taking_off() const override;
+
+    // Pilot command check
+    bool pitch_command_active; // New flag for pitch command
+    
 #if AP_SCRIPTING_ENABLED || AP_EXTERNAL_CONTROL_ENABLED
     bool set_target_location(const Location& target_loc) override;
 #endif //AP_SCRIPTING_ENABLED || AP_EXTERNAL_CONTROL_ENABLED

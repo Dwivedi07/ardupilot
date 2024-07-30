@@ -203,6 +203,13 @@ void Plane::read_radio()
         }
     }
 
+    // Check for pitch command
+    if (channel_pitch->get_control_in() != 0) {
+        pitch_command_active = true;
+    } else {
+        pitch_command_active = false;
+    }
+    
     rudder_arm_disarm_check();
 
 #if HAL_QUADPLANE_ENABLED
