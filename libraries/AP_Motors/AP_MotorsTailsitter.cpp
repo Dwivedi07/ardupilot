@@ -24,6 +24,8 @@
 #include <GCS_MAVLink/GCS.h>
 #include <SRV_Channel/SRV_Channel.h>
 
+#include <AP_Logger/AP_Logger.h>
+
 extern const AP_HAL::HAL& hal;
 
 #define SERVO_OUTPUT_RANGE  4500
@@ -55,7 +57,7 @@ void AP_MotorsTailsitter::init(motor_frame_class frame_class, motor_frame_type f
 
     //////////////////////////////////////////////////////////////////////////////////////
     // Initialize logger for compensation gain
-    logger = AP_Logger::get_singleton();
+    // logger = AP_Logger::get_singleton();
     //////////////////////////////////////////////////////////////////////////////////////
 }
 
@@ -152,10 +154,11 @@ void AP_MotorsTailsitter::output_armed_stabilizing()
     /////////////////////////////////////////////////////////////////////////////////////////////
     // Logging Compensation Gain
     
-    if (logger != nullptr) {
-        logger->Write_Parameter("compensation_gain", compensation_gain);
-    }
-
+    // if (logger != nullptr) {
+    //     logger->Write_Parameter("compensation_gain", compensation_gain);
+    // }
+    AP::logger().Write("COMG", "compensation_gain", "f",
+                                        compensation_gain);
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     roll_thrust = (_roll_in + _roll_in_ff) * compensation_gain;

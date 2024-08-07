@@ -7,7 +7,7 @@
 #include "AP_MotorsMulticopter.h"
 
 // Adding the logger
-#include <AP_Logger/AP_Logger.h>
+// #include <AP_Logger/AP_Logger.h>
 
 
 
@@ -61,7 +61,7 @@ protected:
     //////////////////////////////////////////////////////////////////////////////////
     // Logger
 
-    AP_Logger *logger;
+    // AP_Logger *logger;
     //////////////////////////////////////////////////////////////////////////////////
 
 };
