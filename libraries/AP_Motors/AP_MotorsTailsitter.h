@@ -6,6 +6,11 @@
 #include <AP_Math/AP_Math.h>
 #include "AP_MotorsMulticopter.h"
 
+// Adding the logger
+#include <AP_Logger/AP_Logger.h>
+
+
+
 /// @class      AP_MotorsTailsitter
 class AP_MotorsTailsitter : public AP_MotorsMulticopter {
 public:
@@ -53,5 +58,10 @@ protected:
 
     // true if differential thrust is available
     bool _has_diff_thrust;
+    //////////////////////////////////////////////////////////////////////////////////
+    // Logger
+
+    AP_Logger *logger;
+    //////////////////////////////////////////////////////////////////////////////////
 
 };

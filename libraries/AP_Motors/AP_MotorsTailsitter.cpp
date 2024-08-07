@@ -52,6 +52,11 @@ void AP_MotorsTailsitter::init(motor_frame_class frame_class, motor_frame_type f
 
     // record successful initialisation if what we setup was the desired frame_class
     set_initialised_ok(frame_class == MOTOR_FRAME_TAILSITTER);
+
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Initialize logger for compensation gain
+    logger = AP_Logger::get_singleton();
+    //////////////////////////////////////////////////////////////////////////////////////
 }
 
 
@@ -144,6 +149,15 @@ void AP_MotorsTailsitter::output_armed_stabilizing()
 
     // apply voltage and air pressure compensation
     const float compensation_gain = thr_lin.get_compensation_gain();
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    // Logging Compensation Gain
+    
+    if (logger != nullptr) {
+        logger->Write_Parameter("compensation_gain", compensation_gain);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
     roll_thrust = (_roll_in + _roll_in_ff) * compensation_gain;
     pitch_thrust = _pitch_in + _pitch_in_ff;
     yaw_thrust = _yaw_in + _yaw_in_ff;
