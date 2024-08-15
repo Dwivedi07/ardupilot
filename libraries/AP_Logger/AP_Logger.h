@@ -283,6 +283,16 @@ public:
     void WriteV(const char *name, const char *labels, const char *units, const char *mults, const char *fmt, va_list arg_list, bool is_critical=false, bool is_streaming=false);
 
     void Write_PID(uint8_t msg_type, const class AP_PIDInfo &info);
+    //////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+   void Write_CompensationGain(float compensation_gain);
+
+
+   /////////////////////////////////////////////////////////////////////////////////////////
+
 
     // returns true if logging of a message should be attempted
     bool should_log(uint32_t mask) const;

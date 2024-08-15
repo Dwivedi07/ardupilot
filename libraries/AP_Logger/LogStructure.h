@@ -665,6 +665,15 @@ struct PACKED log_VER {
     uint8_t filter_version;
 };
 
+/////////////////////////////////////////////////////////////////
+struct PACKED log_Test {
+    LOG_PACKET_HEADER;
+    uint64_t time_us;
+    float compensation_gain;
+};
+///////////////////////////////////////////////////////////
+
+
 
 // FMT messages define all message formats other than FMT
 // UNIT messages define units which can be referenced by FMTU messages
@@ -1394,6 +1403,7 @@ enum LogMessages : uint8_t {
     LOG_RCOUT3_MSG,
     LOG_IDS_FROM_FENCE,
     LOG_IDS_FROM_HAL,
+    LOG_TEST_MSG,
 
     _LOG_LAST_MSG_
 };

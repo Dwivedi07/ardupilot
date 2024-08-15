@@ -157,8 +157,11 @@ void AP_MotorsTailsitter::output_armed_stabilizing()
     // if (logger != nullptr) {
     //     logger->Write_Parameter("compensation_gain", compensation_gain);
     // }
-    AP::logger().Write("COMG", "compensation_gain", "f",
-                                        compensation_gain);
+    // AP::logger().Write("COMG", "compensation_gain", "f",
+    //                                     compensation_gain);
+
+    AP::logger().Write_CompensationGain(compensation_gain);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     roll_thrust = (_roll_in + _roll_in_ff) * compensation_gain;

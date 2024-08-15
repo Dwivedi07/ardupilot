@@ -988,6 +988,18 @@ void AP_Logger::Write(const char *name, const char *labels, const char *units, c
     WriteV(name, labels, units, mults, fmt, arg_list);
     va_end(arg_list);
 }
+//////////////////////////////////////////////////////////////////////////////////////
+void AP_Logger::Write_CompensationGain(float compensation_gain)
+{
+    struct log_Test pkt = {
+        LOG_PACKET_HEADER_INIT(LOG_TEST_MSG),
+        time_us : AP_HAL::micros64(),
+        compensation_gain : compensation_gain
+    };
+    AP::logger().WriteBlock(&pkt, sizeof(pkt));
+}
+//////////////////////////////////////////////////////////////////////////////////////
+
 
 void AP_Logger::WriteStreaming(const char *name, const char *labels, const char *fmt, ...)
 {
